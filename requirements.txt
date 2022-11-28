@@ -1,3 +1,10 @@
+# base 
 fastapi
 pydantic
+sqlalchemy
+
+# deployment
 uvicorn
+
+# thirdparty apps
+email-validator
