@@ -1,15 +1,15 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from core.database import Base
-from sqlalchemy.orm import relationship
-
+# from sqlalchemy.orm import relationship
+from fastapi.encoders import jsonable_encoder
 
 class Post(Base):
-    __tablename__ = 'post'
+    __tablename__ = 'posts'
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
-    body = Column(String)
-    # user_id = Column(Integer, ForeignKey('users.id'))
+    content = Column(String)
 
-    # creator = relationship("User", back_populates="blogs")
+    def json(self):
+        return jsonable_encoder(self)
 
