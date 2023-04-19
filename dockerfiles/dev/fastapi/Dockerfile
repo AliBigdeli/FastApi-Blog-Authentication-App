@@ -1,9 +1,10 @@
-FROM python:3.9-slim-buster
+FROM python:3.10-slim-buster
 
-WORKDIR /user/src
+WORKDIR /usr/src/app
 
-COPY ./requirements.txt /requirements.txt
+COPY ./requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade -r /requirements.txt
+RUN pip install --upgrade pip  && \
+    pip install --no-cache-dir -r requirements.txt 
 
-COPY ./src .
+COPY ./core .

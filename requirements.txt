@@ -2,9 +2,26 @@
 fastapi
 pydantic
 sqlalchemy
+passlib
 
 # deployment
 uvicorn
+whitenoise
+
+# sentry exception logger
+sentry-sdk[fastapi]
+
+# refactoring and tests
+black
+flake8
+pytest
+httpx
+
+# postgresdb client
+psycopg2-binary
+
+# mongodb client
+motor
 
 # thirdparty apps
 email-validator
