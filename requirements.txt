@@ -18,7 +18,7 @@ pytest
 httpx
 
 # postgresdb client
-psycopg2-binary
+psycopg[binary,pool]
 
 # mongodb client
 motor
