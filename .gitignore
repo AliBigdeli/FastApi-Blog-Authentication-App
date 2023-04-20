@@ -127,4 +127,4 @@ dmypy.json
 core/log.fastapi
 
 #postgres db data directory
-data/*
+postgres/data/*
