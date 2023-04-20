@@ -23,3 +23,4 @@ class UserModel(Base):
     
     def password_verification(self,password:str):
         return hash.bcrypt.verify(password,self.password_hash)
+    

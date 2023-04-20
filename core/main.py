@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from core.database import create_db
 from blog import routers as blog_router
-from account import router as account_router
+from accounts import router as account_router
 from core.meta_tags import tags_metadata
 from core.config import settings
 

@@ -21,6 +21,6 @@ def get_db():
         
 
 def create_db():
-    from account import models as user_models
+    from accounts import models as user_models
     user_models.Base.metadata.create_all(engine)
     return Base.metadata.create_all(bind=engine)

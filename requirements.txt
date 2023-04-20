@@ -1,5 +1,5 @@
 # base 
-fastapi
+fastapi[all]
 pydantic
 sqlalchemy
 passlib
@@ -18,10 +18,11 @@ pytest
 httpx
 
 # postgresdb client
-psycopg[binary,pool]
+psycopg2-binary
 
 # mongodb client
 motor
 
 # thirdparty apps
-email-validator
+pydantic[email]
+PyJWT
