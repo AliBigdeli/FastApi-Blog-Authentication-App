@@ -11,7 +11,7 @@ class PostModel(Base):
     title = Column(String)
     content = Column(String)
     
-    # users = relationship("UserModel",back_populates='posts')
+    users = relationship("UserModel",back_populates='posts')
 
     def json(self):
         return jsonable_encoder(self)

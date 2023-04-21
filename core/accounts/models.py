@@ -11,11 +11,10 @@ class UserModel(Base):
     id = Column(Integer,primary_key=True,index=True)
     email = Column(String,unique=True,index=True)
     password = Column(String)
-    username = Column(String)
     created_date = Column(DateTime,default=datetime.datetime.utcnow())
     updated_date = Column(DateTime)
     
-    # posts = relationship("PostModel",back_populates='users')
+    posts = relationship("PostModel",back_populates='users')
     
     def json(self):
         return jsonable_encoder(self)

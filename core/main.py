@@ -5,6 +5,7 @@ from blog import routers as blog_router
 from accounts import router as account_router
 from core.meta_tags import tags_metadata
 from core.config import settings
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Simple Blog Api",
@@ -22,6 +23,14 @@ app = FastAPI(
     openapi_tags=tags_metadata,
     docs_url="/swagger"
     
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

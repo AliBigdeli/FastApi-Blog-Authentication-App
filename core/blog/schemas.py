@@ -8,4 +8,3 @@ class PostSchema(BaseModel):
 class PostUpdateSchema(BaseModel):
     title : Optional[str]= None
     content : Optional[str]= None
-    user : int
