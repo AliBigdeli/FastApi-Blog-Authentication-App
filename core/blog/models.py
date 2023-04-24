@@ -13,6 +13,4 @@ class PostModel(Base):
     
     users = relationship("UserModel",back_populates='posts')
 
-    def json(self):
-        return jsonable_encoder(self)
 

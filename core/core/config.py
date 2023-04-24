@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     SENTRY_DSN:str = "add sentry dsn url "
     JWT_SECRET:str = "please_please_update_me_please"
     JWT_ALGORITHM:str = "HS256"
-    JWT_EXPIRATION:int = 600
+    JWT_EXPIRATION:int = 6000
 
 
 settings = Settings()
