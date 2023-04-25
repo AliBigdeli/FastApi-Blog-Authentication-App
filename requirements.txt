@@ -1,6 +1,5 @@
 # base 
 fastapi[all]
-fastapi-pagination
 pydantic
 sqlalchemy
 passlib

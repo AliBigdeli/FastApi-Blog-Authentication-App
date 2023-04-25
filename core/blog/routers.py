@@ -4,8 +4,8 @@ from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from sqlalchemy import exc
+from sqlalchemy import and_, or_, not_
 from fastapi import Query
-from fastapi_pagination import Page, add_pagination, paginate
 from accounts.auth.auth_bearer import JWTBearer
 from core.database import get_db
 from utils.paginations import add_pagination
@@ -27,8 +27,8 @@ async def post_list(
 ):
     posts = db.query(models.PostModel)
     if search is not None:
-        posts = posts.filter(models.PostModel.title.ilike(
-            f'%{search}%'), models.PostModel.content.ilike(f'%{search}%'))
+        posts = posts.filter(
+            models.PostModel.title.contains(search) | models.PostModel.content.contains(search))
 
     if ordering is not None:
         try:
@@ -69,8 +69,8 @@ async def post_list(
 ):
     posts = db.query(models.PostModel).filter(models.PostModel.user == user_id)
     if search is not None:
-        posts = posts.filter(models.PostModel.title.ilike(
-            f'%{search}%'), models.PostModel.content.ilike(f'%{search}%'))
+        posts = posts.filter(
+            models.PostModel.title.contains(search) | models.PostModel.content.contains(search))
 
     if ordering is not None:
         try:
