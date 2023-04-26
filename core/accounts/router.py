@@ -21,9 +21,9 @@ router = APIRouter(
 def account_login(request: schemas.UserLoginSchema,db: Session = Depends(get_db)):
     user_obj = db.query(models.UserModel).filter(models.UserModel.email == request.email).first()
     if not user_obj:
-        raise HTTPException(status_code=403, detail="Authentication failed")
+        raise HTTPException(status_code=401, detail="Authentication failed")
     elif user_obj.password != request.password:
-        raise HTTPException(status_code=403, detail="Authentication failed")
+        raise HTTPException(status_code=401, detail="Authentication failed")
     
     access_token = auth_handler.encode_access_jwt(user_obj.id)
     refresh_token = auth_handler.encode_refresh_jwt(user_obj.id)
