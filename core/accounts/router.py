@@ -33,7 +33,7 @@ def account_login(request: schemas.UserLoginSchema,db: Session = Depends(get_db)
         "user_id": 1,
         "email": request.email
 
-    }, status_code=status.HTTP_201_CREATED)
+    }, status_code=status.HTTP_200_OK)
 
 
 @router.post('/refresh/', response_model=schemas.ResponseRefreshTokenSchema, status_code=status.HTTP_201_CREATED)
