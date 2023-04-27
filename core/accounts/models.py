@@ -3,7 +3,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey,DateTime
 from core.database import Base
 from sqlalchemy.orm import relationship
 from fastapi.encoders import jsonable_encoder
-from passlib import hash
 
 class UserModel(Base):
     __tablename__ = "users"
@@ -20,6 +19,5 @@ class UserModel(Base):
         return jsonable_encoder(self)
     
     
-    def password_verification(self,password:str):
-        return hash.bcrypt.verify(password,self.password_hash)
+
     

@@ -1,6 +1,6 @@
 from pydantic import BaseModel,EmailStr
 from typing import List, Optional
-
+import bcrypt
 class UserRegistrationSchema(BaseModel):
     email: EmailStr
     password: str
@@ -14,6 +14,7 @@ class UserRegistrationSchema(BaseModel):
                 "password1": "yourpassword"
             }
         }
+    
 
 class ResponseUserRegistrationSchema(BaseModel):
     detail:str
@@ -36,6 +37,8 @@ class UserLoginSchema(BaseModel):
                 "password": "yourpassword"
             }
         }
+
+    
 class ResponseUserLoginSchema(BaseModel):
     access_token: str 
     refresh_token: str 
