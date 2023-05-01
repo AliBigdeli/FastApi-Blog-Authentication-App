@@ -50,6 +50,7 @@ services:
       - PGDB_USERNAME=postgres
       - PGDB_DBNAME=postgres
       - PGDB_HOSTNAME=postgresdb
+      - DATABASE_URL=postgresql://postgres:postgres@postgresdb:5432/postgres
       - ENABLE_SENTRY=False
       - SENTRY_DSN=None
       # - MGDB_PORT=27017
@@ -57,7 +58,7 @@ services:
       # - MGDB_USERNAME=mongo
       # - MGDB_DBNAME=mongo
       # - MGDB_HOSTNAME=mongodb
-
+    restart: always
 
       
     depends_on:

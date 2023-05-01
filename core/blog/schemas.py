@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Optional
-
+from datetime import datetime
 class PostSchema(BaseModel):
     title : str
     content : str
@@ -15,6 +15,8 @@ class PostResponse(BaseModel):
     title: str
     user: int
     content: str
+    created_at: Optional[datetime]
+    modified_at: Optional[datetime]
 
     class Config:
         orm_mode = True
