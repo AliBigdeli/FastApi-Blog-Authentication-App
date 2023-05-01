@@ -100,7 +100,7 @@ async def post_detail(id: int, db: Session = Depends(get_db), user_id: int = Dep
         models.PostModel.id == id, models.PostModel.user == user_id).first()
     if not post_obj:
         raise HTTPException(status_code=404, detail="post not found")
-    return JSONResponse(content=jsonable_encoder(schemas.PostResponse.from_orm(post_obj)), status_code=status.HTTP_200_OK)
+    return JSONResponse(content=jsonable_encoder(schemas.AuthorPostResponse.from_orm(post_obj)), status_code=status.HTTP_200_OK)
 
 
 @router.post('/user/post/')
