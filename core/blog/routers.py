@@ -121,7 +121,7 @@ async def post_update(id: int, request: schemas.PostSchema, db: Session = Depend
         raise HTTPException(status_code=404, detail="post not found")
     post_obj.update(request.dict())
     db.commit()
-    return JSONResponse(content=jsonable_encoder(post_obj.first()), status_code=status.HTTP_202_ACCEPTED)
+    return JSONResponse(content=jsonable_encoder(schemas.AuthorPostResponse.from_orm(post_obj)) ,status_code=status.HTTP_202_ACCEPTED)
 
 
 @router.patch('/user/post/{id}/')
@@ -132,7 +132,7 @@ async def post_partial_update(id: int, request: schemas.PostUpdateSchema, db: Se
         raise HTTPException(status_code=404, detail="post not found")
     post_obj.update(request.dict(exclude_unset=True))
     db.commit()
-    return JSONResponse(content=jsonable_encoder(post_obj.first()), status_code=status.HTTP_202_ACCEPTED)
+    return JSONResponse(content=jsonable_encoder(schemas.AuthorPostResponse.from_orm(post_obj)) , status_code=status.HTTP_202_ACCEPTED)
 
 
 @router.delete('/user/post/{id}/', status_code=status.HTTP_204_NO_CONTENT)
