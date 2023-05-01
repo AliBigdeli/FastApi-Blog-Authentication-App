@@ -7,9 +7,9 @@ class PostSchema(BaseModel):
     is_published: bool
     
 class PostUpdateSchema(BaseModel):
-    title : Optional[str]= None
-    content : Optional[str]= None
-    is_published: Optional[str]= None
+    title : Optional[str]
+    content : Optional[str]
+    is_published: Optional[bool]
     
 
 class PostResponse(BaseModel):
