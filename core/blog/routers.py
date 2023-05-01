@@ -35,7 +35,9 @@ async def post_list(
             posts = posts.order_by(text(ordering))
         except exc.SQLAlchemyError:
             pass
-
+    
+    posts = posts.filter( models.PostModel.is_published == True)
+    
     posts, total_items, total_pages = add_pagination(posts, page, page_size)
 
     posts = posts.all()
@@ -52,7 +54,7 @@ async def post_list(
 @router.get('/post/{id}/')
 async def post_detail(id: int, db: Session = Depends(get_db)):
     post_obj = db.query(models.PostModel).filter(
-        models.PostModel.id == id).first()
+        models.PostModel.id == id,models.PostModel.is_published == True).first()
     if not post_obj:
         raise HTTPException(status_code=404, detail="post not found")
     return JSONResponse(content=jsonable_encoder(schemas.PostResponse.from_orm(post_obj)), status_code=status.HTTP_200_OK)
