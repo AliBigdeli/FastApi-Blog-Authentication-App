@@ -10,7 +10,7 @@ class JWTBearer(HTTPBearer):
     If a user receives a 403 status code, it means they are authenticated, but they still do not have the necessary permissions to access the resource.
     '''
 
-    def __init__(self, auto_error: bool = True):
+    def __init__(self, auto_error: bool = False):
         super(JWTBearer, self).__init__(auto_error=auto_error)
 
     async def __call__(self, request: Request):
@@ -25,7 +25,7 @@ class JWTBearer(HTTPBearer):
             return decode_access_jwt(credentials.credentials).get("user_id")
         else:
             raise HTTPException(
-                status_code=401, detail="Invalid authorization code.")
+                status_code=401, detail="Not authenticated")
 
     def verify_jwt(self, jwtoken: str) -> bool:
         isTokenValid: bool = False
