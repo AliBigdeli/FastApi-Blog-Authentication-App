@@ -38,7 +38,22 @@ class UserLoginSchema(BaseModel):
             }
         }
 
-    
+
+class ChangePasswordSchema(BaseModel):
+    old_password: str 
+    new_password: str 
+    new_password1: str 
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "old_password": "old_password",
+                "new_password": "new_password",
+                "new_password1": "confirm_password"
+            }
+        }
+
+
 class ResponseUserLoginSchema(BaseModel):
     access_token: str 
     refresh_token: str 
