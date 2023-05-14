@@ -6,7 +6,7 @@ from accounts import router as account_router
 from core.meta_tags import tags_metadata
 from core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
-
+from core.custom_exception_handler import handler
 app = FastAPI(
     title="Simple Blog Api",
     description="this is a simple blog app with minimal usage of authentication and post managing",
@@ -43,6 +43,9 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     print("shutdown")
+
+app.add_exception_handler(Exception, handler)
+
 
 app.include_router(blog_router.router)
 app.include_router(account_router.router)
