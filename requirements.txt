@@ -28,3 +28,4 @@ motor
 # thirdparty apps
 pydantic[email]
 PyJWT
+fastapi-mail

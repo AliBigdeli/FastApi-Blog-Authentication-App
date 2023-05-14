@@ -24,5 +24,12 @@ class Settings(BaseSettings):
     JWT_ALGORITHM:str = "HS256"
     JWT_EXPIRATION:int = 6000
 
+    EMAIL_HOST:str = "smtp4dev"
+    EMAIL_HOST_USER:str = ""
+    EMAIL_HOST_PASSWORD:str = ""
+    EMAIL_HOST_PORT:int = 25
+    EMAIL_USE_STARTTLS:bool = False
+    EMAIL_USE_SSL_TLS:bool = False 
+    EMAIL_DEFAULT_FROM:str = "bigdeli.ali3@gmail.com"
 
 settings = Settings()

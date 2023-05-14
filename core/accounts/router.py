@@ -5,6 +5,9 @@ from accounts.auth import auth_handler
 from accounts.auth.auth_bearer import JWTBearer
 from core.database import get_db
 from sqlalchemy.orm import Session
+
+
+from core.mail import send_email
 from . import models
 from . import schemas
 import bcrypt
@@ -96,9 +99,62 @@ def change_password(request: schemas.ChangePasswordSchema, db: Session = Depends
     encoded_password = request.new_password.encode('utf-8')
     hashed_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
 
-    user_obj.update({"password": hashed_password})
+    user_obj.password = hashed_password.decode("utf-8")
+    db.add(user_obj)
     db.commit()
+    db.refresh(user_obj)
 
     return JSONResponse({
         "detail": "password has changed successfully"
+    }, status_code=status.HTTP_201_CREATED)
+
+
+@router.post('/reset-password/', status_code=status.HTTP_201_CREATED)
+async def reset_password(request: schemas.ResetPasswordSchema, db: Session = Depends(get_db)):
+    user_obj = db.query(models.UserModel).filter(
+        models.UserModel.email == request.email).first()
+
+    if not user_obj:
+        raise HTTPException(
+            status_code=404, detail="user doesnt exists")
+
+    await send_email(
+        to=user_obj.email,
+        subject="Password reset request",
+        html_path="./accounts/emails/password_reset.html",
+        template_kwargs={"token":auth_handler.encode_reset_token(user_obj.id)},
+        silent=False
+    )
+    return JSONResponse({
+        "detail": "reset link has been sent to your email"
+    }, status_code=status.HTTP_201_CREATED)
+
+
+@router.post('/reset-password/set-password/', status_code=status.HTTP_201_CREATED)
+async def reset_password(request: schemas.SetResetPasswordSchema, db: Session = Depends(get_db)):
+    user_id = auth_handler.decode_reset_token(
+        request.token).get("user_id")
+    
+    user_obj = db.query(models.UserModel).filter(
+        models.UserModel.id == user_id).first()
+    
+    if not user_obj:
+        raise HTTPException(
+            status_code=404, detail="user doesnt exists")
+
+    if request.new_password != request.new_password1:
+        raise HTTPException(
+            status_code=400, detail="new passwords doest match")
+        
+
+    encoded_password = request.new_password.encode('utf-8')
+    hashed_password = bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+
+    user_obj.password = hashed_password.decode("utf-8")
+    db.add(user_obj)
+    db.commit()
+    db.refresh(user_obj)
+    
+    return JSONResponse({
+        "detail": "password reset done successfully"
     }, status_code=status.HTTP_201_CREATED)

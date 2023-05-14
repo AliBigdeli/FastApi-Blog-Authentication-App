@@ -52,6 +52,29 @@ class ChangePasswordSchema(BaseModel):
                 "new_password1": "confirm_password"
             }
         }
+class SetResetPasswordSchema(BaseModel):
+    token: str 
+    new_password: str 
+    new_password1: str 
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "token": "token",
+                "new_password": "new_password",
+                "new_password1": "confirm_password"
+            }
+        }
+
+class ResetPasswordSchema(BaseModel):
+    email: EmailStr 
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "email": "bigdeli.ali3@gmail.com",
+            }
+        }
 
 
 class ResponseUserLoginSchema(BaseModel):
