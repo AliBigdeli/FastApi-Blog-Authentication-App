@@ -28,7 +28,7 @@ def encode_refresh_jwt(user_id: str) -> Dict[str, str]:
     payload = {
         "user_id": user_id,  
         "token_type": "refresh",
-        "exp": int(time.time() + settings.JWT_EXPIRATION),
+        "exp": int(time.time() + settings.JWT_REFRESH_EXPIRATION),
     }
     token = jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
 
@@ -43,6 +43,8 @@ def decode_refresh_jwt(token: str) -> dict:
         return decoded_token if decoded_token["exp"] >= time.time() else None
     except jwt.exceptions.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Expired Token")
+    except jwt.exceptions.DecodeError:
+        raise HTTPException(status_code=401, detail="Invalid Token")
 
 
 def encode_reset_token(user_id: str) -> Dict[str, str]:
@@ -64,3 +66,5 @@ def decode_reset_token(token: str) -> dict:
         return decoded_token if decoded_token["exp"] >= time.time() else None
     except jwt.exceptions.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Expired Token")
+    except jwt.exceptions.DecodeError:
+        raise HTTPException(status_code=401, detail="Invalid Token")

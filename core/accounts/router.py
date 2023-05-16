@@ -49,12 +49,10 @@ def account_refresh_token(request: schemas.RefreshTokenSchema, db: Session = Dep
     user_id = auth_handler.decode_refresh_jwt(
         request.refresh_token).get("user_id")
     access_token = auth_handler.encode_access_jwt(user_id)
-    refresh_token = auth_handler.encode_refresh_jwt(user_id)
     return JSONResponse({
         "access_token": access_token,
-        "refresh_token": refresh_token,
 
-    }, status_code=status.HTTP_201_CREATED)
+    }, status_code=status.HTTP_200_OK)
 
 
 @router.post('/register/', response_model=schemas.ResponseUserRegistrationSchema, status_code=status.HTTP_201_CREATED)

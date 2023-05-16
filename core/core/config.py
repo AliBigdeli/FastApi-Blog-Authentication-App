@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     JWT_SECRET:str = "please_please_update_me_please"
     JWT_ALGORITHM:str = "HS256"
     JWT_EXPIRATION:int = 6000
+    JWT_REFRESH_EXPIRATION:int = 300000
 
     EMAIL_HOST:str = "smtp4dev"
     EMAIL_HOST_USER:str = ""
