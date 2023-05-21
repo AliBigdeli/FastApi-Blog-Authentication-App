@@ -319,11 +319,11 @@ alembic upgrade head
 # Testing Usage
 ## running all tests
 ```bash
-docker compose run --rm backend sh -c " black -l 79 && flake8 && pytest ." -v core:/usr/src/app
+docker compose run --rm backend sh -c "pytest ." -v core:/usr/src/app
 ```
 or
 ```bash
-docker compose exec backend sh -c sh -c " black -l 79 && flake8 && pytest ." 
+docker compose exec backend sh -c sh -c "pytest ." 
 ```
 
 # License

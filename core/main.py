@@ -7,6 +7,7 @@ from core.meta_tags import tags_metadata
 from core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 from core.custom_exception_handler import handler
+
 app = FastAPI(
     title="Simple Blog Api",
     description="this is a simple blog app with minimal usage of authentication and post managing",
@@ -17,12 +18,9 @@ app = FastAPI(
         "url": "https://alibigdeli.github.io/",
         "email": "bigdeli.ali3@gmail.com",
     },
-    license_info={
-        "name": "MIT"
-    },
+    license_info={"name": "MIT"},
     openapi_tags=tags_metadata,
-    docs_url="/swagger"
-    
+    docs_url="/swagger",
 )
 
 app.add_middleware(
@@ -43,6 +41,7 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     print("shutdown")
+
 
 app.add_exception_handler(Exception, handler)
 

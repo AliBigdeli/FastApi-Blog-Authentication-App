@@ -1,4 +1,3 @@
-
 from fastapi.testclient import TestClient
 from main import app
 import pytest
@@ -14,7 +13,6 @@ def test_client():
 
 
 def test_non_auth_posts_list_res_200(test_client):
-
     # send a POST request to the login endpoint with the test data
     response = test_client.get("/blog/api/v1/post/")
 
@@ -32,7 +30,6 @@ def test_non_auth_posts_list_res_200(test_client):
 
 
 def test_non_auth_post_detail_res_404(test_client):
-
     # send a POST request to the login endpoint with the test data
     response = test_client.get("/blog/api/v1/post/192/")
 

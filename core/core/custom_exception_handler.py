@@ -3,10 +3,12 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
+
 class DjangoException(Exception):
     def __init__(self, detail=None):
         self.detail = detail or "Server Error"
         super().__init__()
+
 
 async def handler(request: Request, exc: Exception) -> JSONResponse:
     if isinstance(exc, RequestValidationError):

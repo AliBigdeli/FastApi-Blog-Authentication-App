@@ -1,5 +1,4 @@
 import requests
-from google.oauth2.credentials import Credentials
 
 
 def verify_recaptcha(response_token: str, secret_key: str) -> bool:
@@ -8,10 +7,7 @@ def verify_recaptcha(response_token: str, secret_key: str) -> bool:
 
     # Verify the reCAPTCHA response token using the reCAPTCHA API
     try:
-        data = {
-            "secret": secret_key,
-            "response": response_token
-        }
+        data = {"secret": secret_key, "response": response_token}
         response = requests.post(recaptcha_url, data=data)
         response.raise_for_status()
         result = response.json()

@@ -20,8 +20,15 @@ conf = ConnectionConfig(
 mail = FastMail(conf)
 
 
-async def send_email(to: EmailStr, subject: str, html_path=None,template_kwargs={}, body=None,silent=True):
-    html_body = ''
+async def send_email(
+    to: EmailStr,
+    subject: str,
+    html_path=None,
+    template_kwargs={},
+    body=None,
+    silent=True,
+):
+    html_body = ""
     if html_path:
         try:
             html_body = pathlib.Path(html_path).read_text()
@@ -37,7 +44,7 @@ async def send_email(to: EmailStr, subject: str, html_path=None,template_kwargs=
         subject=subject,
         recipients=[to],
         body=body or html_body,
-        subtype="html"
+        subtype="html",
     )
     try:
         await mail.send_message(message)
