@@ -18,6 +18,3 @@ class PostModel(Base):
     is_published = Column(Boolean,default=False)
     
     users = relationship("UserModel", back_populates='posts')
-
-
-created_date = Column(default=datetime)
