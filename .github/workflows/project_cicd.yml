@@ -41,7 +41,7 @@ jobs:
 
     # global environment for this job
     env: 
-      PGDB_HOST: 127.0.0.1
+      PGDB_HOSTNAME: 127.0.0.1
       DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
     
     # steps which it will go through for test
