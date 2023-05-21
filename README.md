@@ -1,5 +1,4 @@
 <div align="center">
-<img loading="lazy" style="width:700px" src="./docs/banner.png">
 <h1 align="center">FastAPI Blog With Authentication App</h1>
 <h3 align="center">Sample Project to use fast api with base usage and deployment</h3>
 </div>
