@@ -22,6 +22,7 @@
   - [how to use alembic?](#how-to-use-alembic)
 - [Testing Usage](#testing-usage)
   - [running all tests](#running-all-tests)
+- [todo](#todo)
 - [License](#license)
 - [Bugs](#bugs)
 
@@ -324,6 +325,11 @@ or
 ```bash
 docker compose exec backend sh -c sh -c "pytest ." 
 ```
+
+# todo
+
+- [ ] add tests
+- [ ] update docs for cicd
 
 # License
 MIT.
