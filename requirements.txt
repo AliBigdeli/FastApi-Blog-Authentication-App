@@ -1,6 +1,7 @@
 # base 
 fastapi[all]
 pydantic
+pydantic-settings
 sqlalchemy
 bcrypt
 alembic
