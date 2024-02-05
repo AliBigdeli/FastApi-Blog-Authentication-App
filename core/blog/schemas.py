@@ -25,6 +25,7 @@ class PostResponse(BaseModel):
 
     class Config:
         orm_mode = True
+        from_attributes=True
 
 
 class AuthorPostResponse(BaseModel):
@@ -38,3 +39,4 @@ class AuthorPostResponse(BaseModel):
 
     class Config:
         orm_mode = True
+        from_attributes=True
